@@ -10,10 +10,26 @@ export class MailService {
       await this.mailerService.sendMail({
         to: to,
         subject: 'Your Verification Code',
-        template: './welcome',
+        template: './verification',
         context: {
           message: 'Use the verification code below to complete your register',
           code: code,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async sendWelcomeEmail(to: string) {
+    try {
+      await this.mailerService.sendMail({
+        to: to,
+        subject: 'Welcome to Paw Buddy',
+        template: './welcome',
+        context: {
+          message: 'Welcome to Paw Buddy',
         },
       });
     } catch (error) {

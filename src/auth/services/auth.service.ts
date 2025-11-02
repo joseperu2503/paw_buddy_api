@@ -84,6 +84,10 @@ export class AuthService {
       //** Guardar el usuario */
       await this.userRepository.save(user);
 
+      if (type == AuthMethod.EMAIL) {
+        this.mailService.sendWelcomeEmail(user.email!);
+      }
+
       return this.buildAuthResponse(user);
     } catch (error) {
       if (!(error instanceof HttpException)) {
