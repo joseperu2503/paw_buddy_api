@@ -7,14 +7,14 @@ import { UserSeed } from './user.seed';
 export class SeedService {
   constructor(
     private readonly dataSource: DataSource,
-    private readonly userSeed: UserSeed,
     private readonly countrySeed: CountrySeed,
+    private readonly userSeed: UserSeed,
   ) {}
 
   async runSeed() {
     await this.dropAllTables();
-    await this.userSeed.run();
     await this.countrySeed.run();
+    await this.userSeed.run();
   }
 
   async dropAllTables(): Promise<void> {
