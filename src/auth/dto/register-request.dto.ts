@@ -1,4 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsEmail,
@@ -19,38 +18,21 @@ import { PhoneRequestDto } from './phone-request.dto';
 import { VerifyCodeRequestDto } from './verify-code-request.dto';
 
 export class RegisterRequestDto {
-  @ApiProperty({
-    type: String,
-    example: 'test1@gmail.com',
-    nullable: true,
-  })
   @IsString()
   @IsPresent()
   @IsNullableIf((dto) => dto.type === AuthMethod.PHONE)
   @IsEmail()
   email: string | null;
 
-  @ApiProperty({
-    type: PhoneRequestDto,
-
-    nullable: true,
-  })
   @IsPresent()
   @IsNullableIf((dto) => dto.type === AuthMethod.EMAIL)
   @ValidateNested()
   @Type(() => PhoneRequestDto)
   phone: PhoneRequestDto | null;
 
-  @ApiProperty({
-    enum: AuthMethod,
-    example: AuthMethod.EMAIL,
-  })
   @IsEnum(AuthMethod)
   type: AuthMethod;
 
-  @ApiProperty({
-    example: 'password123',
-  })
   @IsString()
   @MinLength(6)
   @MaxLength(50)
@@ -60,16 +42,10 @@ export class RegisterRequestDto {
   })
   password: string;
 
-  @ApiProperty({
-    example: 'John',
-  })
   @IsString()
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty({
-    example: 'Doe',
-  })
   @IsString()
   @IsNotEmpty()
   surname: string;
@@ -78,9 +54,6 @@ export class RegisterRequestDto {
   @IsUrl()
   photo?: string;
 
-  @ApiProperty({
-    example: '123456',
-  })
   @ValidateNested()
   @Type(() => VerifyCodeRequestDto)
   @IsOptional()
