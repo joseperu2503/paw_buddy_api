@@ -10,7 +10,7 @@ export class MailService {
       await this.mailerService.sendMail({
         to: to,
         subject: 'Your Verification Code',
-        template: './verification',
+        template: './welcome',
         context: {
           message: 'Use the verification code below to complete your register',
           code: code,

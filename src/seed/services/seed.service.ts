@@ -4,7 +4,7 @@ import { CountrySeed } from './country.seed';
 import { UserSeed } from './user.seed';
 
 @Injectable()
-export class SeedService {
+export class SeedService { 
   constructor(
     private readonly dataSource: DataSource,
     private readonly countrySeed: CountrySeed,
