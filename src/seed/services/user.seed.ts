@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/auth/entities/user.entity';
-import { AuthMethod } from 'src/core/models/auth-method';
+import { PhoneService } from 'src/phone/services/phone.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -10,6 +10,7 @@ export class UserSeed {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly phoneService: PhoneService,
   ) {}
 
   users: UserSeedData[] = [
@@ -23,8 +24,6 @@ export class UserSeed {
         number: '993689111',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/men/1.jpg',
-      type: AuthMethod.EMAIL,
     },
     {
       id: 'bcd67ec8-4070-472a-bd1f-a46f3674acc1',
@@ -36,8 +35,6 @@ export class UserSeed {
         number: '993689112',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/women/1.jpg',
-      type: AuthMethod.EMAIL,
     },
     {
       id: '9e234ee4-de1e-4061-8794-6e20b46479da',
@@ -49,7 +46,6 @@ export class UserSeed {
         number: '993689113',
         countryId: 168,
       },
-      type: AuthMethod.EMAIL,
     },
     {
       id: 'cde012ec-45ac-484c-bd28-08614f0336db',
@@ -61,8 +57,6 @@ export class UserSeed {
         number: '993689114',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/women/2.jpg',
-      type: AuthMethod.EMAIL,
     },
     {
       id: '75f3a6e3-eea4-48ba-bfa1-9447c7faa7ba',
@@ -74,8 +68,6 @@ export class UserSeed {
         number: '993689115',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/men/2.jpg',
-      type: AuthMethod.EMAIL,
     },
     {
       id: 'd32f1f4d-79a9-4e37-8fb7-425e9ef75b40',
@@ -87,8 +79,6 @@ export class UserSeed {
         number: '993689116',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/women/3.jpg',
-      type: AuthMethod.EMAIL,
     },
     {
       id: 'e79e7b6c-48c2-40cb-8a57-7dcf7cfe6d94',
@@ -100,8 +90,6 @@ export class UserSeed {
         number: '993689117',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/men/3.jpg',
-      type: AuthMethod.EMAIL,
     },
     {
       id: '2774b4e5-e4cf-4ab2-99fe-f80ecb91ff6d',
@@ -113,7 +101,6 @@ export class UserSeed {
         number: '993689118',
         countryId: 168,
       },
-      type: AuthMethod.EMAIL,
     },
     {
       id: '172a390c-8a99-4102-accd-75da4c00551c',
@@ -125,8 +112,6 @@ export class UserSeed {
         number: '993689119',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/men/4.jpg',
-      type: AuthMethod.EMAIL,
     },
     {
       id: 'b27e1454-3ea9-4d28-9fae-90c2de2394f4',
@@ -138,7 +123,6 @@ export class UserSeed {
         number: '993689120',
         countryId: 168,
       },
-      type: AuthMethod.EMAIL,
     },
     {
       id: 'a1c689e8-9db0-4977-a0b7-ca5f6a604fdd',
@@ -150,8 +134,6 @@ export class UserSeed {
         number: '993689121',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/men/5.jpg',
-      type: AuthMethod.EMAIL,
     },
     {
       id: 'ad219bd0-8d41-429c-ba7f-c5e0b44f0e31',
@@ -163,7 +145,6 @@ export class UserSeed {
         number: '993689122',
         countryId: 168,
       },
-      type: AuthMethod.EMAIL,
     },
     {
       id: 'cb1779aa-26b8-4581-a734-075cbe605714',
@@ -175,8 +156,6 @@ export class UserSeed {
         number: '983689123',
         countryId: 168,
       },
-      photo: 'https://randomuser.me/api/portraits/men/6.jpg',
-      type: AuthMethod.EMAIL,
     },
   ];
 
@@ -187,7 +166,7 @@ export class UserSeed {
   }
 
   async create(params: UserSeedData) {
-    const { password, email, phone, type, ...userData } = params;
+    const { password, email, phone, ...userData } = params;
 
     //** Crear el usuario */
     const user = this.userRepository.create({
@@ -196,14 +175,13 @@ export class UserSeed {
     });
 
     //** Aignar email o telefono */
-    if (type == AuthMethod.EMAIL && email) {
-      user.email = email;
-    }
+    user.email = email;
 
-    if (type == AuthMethod.PHONE && phone) {
-      user.phone = phone.number;
-      user.phoneCountryId = phone.countryId;
-    }
+    const newPhone = await this.phoneService.findOrCreate(
+      phone.number,
+      phone.countryId,
+    );
+    user.phone = newPhone;
 
     //** Guardar el usuario */
     await this.userRepository.save(user);
@@ -220,6 +198,4 @@ interface UserSeedData {
     countryId: number;
   };
   password: string;
-  photo?: string;
-  type: AuthMethod;
 }

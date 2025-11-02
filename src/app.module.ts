@@ -3,11 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AccountModule } from './account/account.module';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { CountryModule } from './country/country.module';
 import { MailModule } from './mail/mail.module';
+import { PhoneModule } from './phone/phone.module';
 import { SeedCommand } from './seed/commands/seed.command';
 import { SeedModule } from './seed/seed.module';
 import { VerificationCodesModule } from './verification-codes/verification-codes.module';
@@ -32,8 +32,8 @@ import { VerificationCodesModule } from './verification-codes/verification-codes
     AuthModule,
     VerificationCodesModule,
     MailModule,
-    AccountModule,
     CountryModule,
+    PhoneModule
   ],
   providers: [SeedCommand],
 })
