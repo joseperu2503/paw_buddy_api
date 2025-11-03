@@ -26,9 +26,6 @@ export class User {
   @Column('text')
   name: string;
 
-  @Column('text')
-  surname: string;
-
   @ManyToOne(() => Phone, { nullable: true })
   @JoinColumn({ name: 'phone_id' })
   phone: Phone | null;

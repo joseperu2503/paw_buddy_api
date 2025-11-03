@@ -18,7 +18,6 @@ export class UserSeed {
       id: '578414e1-f1cd-490b-a92b-767899a0d780',
       email: 'test1@gmail.com',
       name: 'John',
-      surname: 'Smith',
       password: 'Abc123',
       phone: {
         number: '993689111',
@@ -29,7 +28,6 @@ export class UserSeed {
       id: 'bcd67ec8-4070-472a-bd1f-a46f3674acc1',
       email: 'test2@gmail.com',
       name: 'Emily',
-      surname: 'Johnson',
       password: 'Abc123',
       phone: {
         number: '993689112',
@@ -40,7 +38,6 @@ export class UserSeed {
       id: '9e234ee4-de1e-4061-8794-6e20b46479da',
       email: 'test3@gmail.com',
       name: 'Michael',
-      surname: 'Brown',
       password: 'Abc123',
       phone: {
         number: '993689113',
@@ -51,7 +48,6 @@ export class UserSeed {
       id: 'cde012ec-45ac-484c-bd28-08614f0336db',
       email: 'test4@gmail.com',
       name: 'Sarah',
-      surname: 'Davis',
       password: 'Abc123',
       phone: {
         number: '993689114',
@@ -62,7 +58,6 @@ export class UserSeed {
       id: '75f3a6e3-eea4-48ba-bfa1-9447c7faa7ba',
       email: 'test5@gmail.com',
       name: 'David',
-      surname: 'Wilson',
       password: 'Abc123',
       phone: {
         number: '993689115',
@@ -73,7 +68,6 @@ export class UserSeed {
       id: 'd32f1f4d-79a9-4e37-8fb7-425e9ef75b40',
       email: 'test6@gmail.com',
       name: 'Olivia',
-      surname: 'Taylor',
       password: 'Abc123',
       phone: {
         number: '993689116',
@@ -84,7 +78,6 @@ export class UserSeed {
       id: 'e79e7b6c-48c2-40cb-8a57-7dcf7cfe6d94',
       email: 'test7@gmail.com',
       name: 'James',
-      surname: 'Anderson',
       password: 'Abc123',
       phone: {
         number: '993689117',
@@ -95,7 +88,6 @@ export class UserSeed {
       id: '2774b4e5-e4cf-4ab2-99fe-f80ecb91ff6d',
       email: 'test8@gmail.com',
       name: 'Sophia',
-      surname: 'Thomas',
       password: 'Abc123',
       phone: {
         number: '993689118',
@@ -106,7 +98,6 @@ export class UserSeed {
       id: '172a390c-8a99-4102-accd-75da4c00551c',
       email: 'test9@gmail.com',
       name: 'William',
-      surname: 'Martinez',
       password: 'Abc123',
       phone: {
         number: '993689119',
@@ -117,7 +108,6 @@ export class UserSeed {
       id: 'b27e1454-3ea9-4d28-9fae-90c2de2394f4',
       email: 'test10@gmail.com',
       name: 'Mia',
-      surname: 'Harris',
       password: 'Abc123',
       phone: {
         number: '993689120',
@@ -128,7 +118,6 @@ export class UserSeed {
       id: 'a1c689e8-9db0-4977-a0b7-ca5f6a604fdd',
       email: 'test11@gmail.com',
       name: 'Robert',
-      surname: 'Clark',
       password: 'Abc123',
       phone: {
         number: '993689121',
@@ -139,7 +128,6 @@ export class UserSeed {
       id: 'ad219bd0-8d41-429c-ba7f-c5e0b44f0e31',
       email: 'test12@gmail.com',
       name: 'Ava',
-      surname: 'Lewis',
       password: 'Abc123',
       phone: {
         number: '993689122',
@@ -150,7 +138,6 @@ export class UserSeed {
       id: 'cb1779aa-26b8-4581-a734-075cbe605714',
       email: 'test13@gmail.com',
       name: 'Benjamin',
-      surname: 'Hall',
       password: 'Abc123',
       phone: {
         number: '983689123',
@@ -191,7 +178,6 @@ export class UserSeed {
 interface UserSeedData {
   id: string;
   name: string;
-  surname: string;
   email: string;
   phone: {
     number: string;

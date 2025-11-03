@@ -46,10 +46,6 @@ export class RegisterRequestDto {
   @IsNotEmpty()
   name: string;
 
-  @IsString()
-  @IsNotEmpty()
-  surname: string;
-
   @IsOptional()
   @IsUrl()
   photo?: string;
