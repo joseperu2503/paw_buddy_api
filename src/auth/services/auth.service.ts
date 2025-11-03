@@ -85,7 +85,7 @@ export class AuthService {
       await this.userRepository.save(user);
 
       if (type == AuthMethod.EMAIL) {
-        this.mailService.sendWelcomeEmail(user.email!);
+        this.mailService.sendWelcomeEmail(user.email!, user.name);
       }
 
       return this.buildAuthResponse(user);
