@@ -161,7 +161,7 @@ export class UserSeed {
       password: bcrypt.hashSync(password, 10),
     });
 
-    //** Aignar email o telefono */
+    //** Aignar email y telefono */
     user.email = email;
 
     const newPhone = await this.phoneService.findOrCreate(
